@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   Avatar,
   Badge,
@@ -52,7 +54,7 @@ const ProductTable = ({ products, isCheck, setIsCheck }) => {
             <TableCell>
               <CheckBox
                 type="checkbox"
-                name={product?.title?.en}
+                name={product?.name?.en}
                 id={product._id}
                 handleClick={handleClick}
                 isChecked={isCheck?.includes(product._id)}
@@ -61,10 +63,10 @@ const ProductTable = ({ products, isCheck, setIsCheck }) => {
 
             <TableCell>
               <div className="flex items-center">
-                {product?.image[0] ? (
+                {product?.images[0] ? (
                   <Avatar
                     className="hidden p-1 mr-2 md:block bg-gray-50 shadow-none"
-                    src={product?.image[0]}
+                    src={product?.images[0]}
                     alt="product"
                   />
                 ) : (
@@ -76,7 +78,7 @@ const ProductTable = ({ products, isCheck, setIsCheck }) => {
                 <div>
                   <h2
                     className={`text-sm font-medium ${
-                      product?.title.length > 30 ? "wrap-long-title" : ""
+                      product?.name.length > 30 ? "wrap-long-title" : ""
                     }`}
                   >
                     {showingTranslateValue(product?.title)?.substring(0, 28)}
@@ -86,40 +88,21 @@ const ProductTable = ({ products, isCheck, setIsCheck }) => {
             </TableCell>
 
             <TableCell>
-              <span className="text-sm">
-                {showingTranslateValue(product?.category?.name)}
-              </span>
+              <span className="text-sm">{product?.category[0]}</span>
             </TableCell>
 
             <TableCell>
               <span className="text-sm font-semibold">
                 {currency}
-                {product?.isCombination
-                  ? getNumberTwo(product?.variants[0]?.originalPrice)
-                  : getNumberTwo(product?.prices?.originalPrice)}
+                {getNumberTwo(product?.price)}
               </span>
             </TableCell>
 
             <TableCell>
-              <span className="text-sm font-semibold">
-                {currency}
-                {product?.isCombination
-                  ? getNumberTwo(product?.variants[0]?.price)
-                  : getNumberTwo(product?.prices?.price)}
-              </span>
+              <span className="text-sm">{product.brand}</span>
             </TableCell>
 
-            <TableCell>
-              <span className="text-sm">{product.stock}</span>
-            </TableCell>
-            <TableCell>
-              {product.stock > 0 ? (
-                <Badge type="success">{t("Selling")}</Badge>
-              ) : (
-                <Badge type="danger">{t("SoldOut")}</Badge>
-              )}
-            </TableCell>
-            <TableCell>
+            {/* <TableCell>
               <Link
                 to={`/product/${product._id}`}
                 className="flex justify-center text-gray-400 hover:text-emerald-600"
@@ -131,11 +114,8 @@ const ProductTable = ({ products, isCheck, setIsCheck }) => {
                   bgColor="#10B981"
                 />
               </Link>
-            </TableCell>
-            <TableCell className="text-center">
-              <ShowHideButton id={product._id} status={product.status} />
-              {/* {product.status} */}
-            </TableCell>
+            </TableCell> */}
+            <TableCell className="text-center">{product?.outOfStock ? "Yes":"No"}</TableCell>
             <TableCell>
               <EditDeleteButton
                 id={product._id}
@@ -143,7 +123,7 @@ const ProductTable = ({ products, isCheck, setIsCheck }) => {
                 isCheck={isCheck}
                 handleUpdate={handleUpdate}
                 handleModalOpen={handleModalOpen}
-                title={showingTranslateValue(product?.title)}
+                title={showingTranslateValue(product?.name)}
               />
             </TableCell>
           </TableRow>

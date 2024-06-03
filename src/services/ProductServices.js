@@ -1,3 +1,5 @@
+/** @format */
+
 import requests from "./httpService";
 
 const ProductServices = {
@@ -6,9 +8,7 @@ const ProductServices = {
     const searchTitle = title !== null ? title : "";
     const searchPrice = price !== null ? price : "";
 
-    return requests.get(
-      `/products?page=${page}&limit=${limit}&category=${searchCategory}&title=${searchTitle}&price=${searchPrice}`
-    );
+    return requests.get(`/api/v1/products`);
   },
 
   getProductById: async (id) => {

@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useContext, useState } from "react";
 import {
   Table,
@@ -73,7 +75,7 @@ const Products = () => {
 
   const handleSelectAll = () => {
     setIsCheckAll(!isCheckAll);
-    setIsCheck(data?.products.map((li) => li._id));
+    setIsCheck(data?.map((li) => li._id));
     if (isCheckAll) {
       setIsCheck([]);
     }
@@ -93,7 +95,7 @@ const Products = () => {
     handleSelectFile,
     handleUploadMultiple,
     handleRemoveSelectFile,
-  } = useProductFilter(data?.products);
+  } = useProductFilter(data);
 
   return (
     <>
@@ -247,20 +249,16 @@ const Products = () => {
                 <TableCell>{t("ProductNameTbl")}</TableCell>
                 <TableCell>{t("CategoryTbl")}</TableCell>
                 <TableCell>{t("PriceTbl")}</TableCell>
-                <TableCell>Sale Price</TableCell>
-                <TableCell>{t("StockTbl")}</TableCell>
-                <TableCell>{t("StatusTbl")}</TableCell>
-                <TableCell className="text-center">{t("DetailsTbl")}</TableCell>
-                <TableCell className="text-center">
-                  {t("PublishedTbl")}
-                </TableCell>
+                <TableCell>Brand</TableCell>
+                <TableCell>Out Of Stock</TableCell>
+                
                 <TableCell className="text-right">{t("ActionsTbl")}</TableCell>
               </tr>
             </TableHeader>
             <ProductTable
               lang={lang}
               isCheck={isCheck}
-              products={data?.products}
+              products={data}
               setIsCheck={setIsCheck}
             />
           </Table>
